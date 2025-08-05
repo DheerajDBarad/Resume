@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Responsive Profile Layout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      min-height: 90vh;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      min-height: 70vh;
+      max-width: 1180px;
+      margin: 10px auto;
+      box-shadow: 0 4px 24px rgb(0 0 0 / 0.1);
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0px;
+      background-color: #022242;
+      color: white;
+      user-select: none;
+      height: 15vh;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      
+    }
+
+    .profile img {
+      width: 200px;
+      height: 200px;
+      margin-left: -50px;
+      border-radius: 50%;
+      border: 2px solid #ecf0f1;
+      object-fit: cover;
+    }
+
+    .profile-info h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .profile-info p {
+      font-size: 14px;
+      margin-top: 4px;
+      color: #bdc3c7;
+    }
+
+    /* Burger Menu */
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .burger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* Main layout */
+    .main {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 90px); /* approximate header height */
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #022242;
+      color: white;
+      transition: transform 0.3s ease;
+      overflow-y: auto;
+      padding-top: 10px;
+    }
+
+    .sidebar.hidden {
+      transform: translateX(-100%);
+    }
+
+    .nav-link {
+      padding: 15px 20px;
+      border-bottom: 1px solid #2c3e50;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-weight: 500;
+      user-select: none;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: #3d566e;
+    }
+
+    .content {
+      flex: 1;
+      background: #ecf0f1;
+      padding: 25px 30px;
+      overflow-y: auto;
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .burger {
+        display: flex;
+      }
+
+      .main {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .sidebar {
+        position: fixed;
+        /* top: 60px; */
+        left: 0;
+        width: 100%;
+        max-height: calc(100vh - 60px);
+        z-index: 1000;
+        transform: translateX(-100%);
+        box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        background: #34495e;
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar.show {
+        transform: translateX(0%);
+      }
+
+      /* When sidebar is shown, prevent body scroll */
+      body.sidebar-open {
+        overflow: hidden;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" style="min-height: 0; padding-left: 20px;">
+    <header class="header">
+      <div class="profile">
+        <img src="file:///C:/Users/Dheeraj/Downloads/DheerajProfile.jpeg" alt="Profile Picture" />
+        <div class="profile-info">
+          <h1>Dheeraj Barad </h1>
+          <p>Software Engineer</p>
+        </div>
+      </div>
+      <div style="text-align: right; background: #0222427a; height: 15vh; padding: 20px; ;">
+          <h6>Updated on:</h6>
+          <p>Date: 05-08-2025</p>
+          <p>Time: 20:50:00</p>
+        </div>
+      <div class="burger" id="burger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+  </div>
+
+  <div class="container">
+    
+
+    <div class="main">
+      <nav class="sidebar" id="sidebar" role="navigation" aria-label="Profile sections navigation">
+        <div class="nav-link active" tabindex="0" onclick="showSection('summary')" onkeypress="if(event.key==='Enter'){showSection('summary')}">Summary</div>
+        <div class="nav-link" tabindex="0" onclick="showSection('employment')" onkeypress="if(event.key==='Enter'){showSection('employment')}">Employment</div>
+        <div class="nav-link" tabindex="0" onclick="showSection('skills')" onkeypress="if(event.key==='Enter'){showSection('skills')}">Skills</div>
+        <div class="nav-link" tabindex="0" onclick="showSection('tools')" onkeypress="if(event.key==='Enter'){showSection('tools')}">Tools</div>
+        <!-- <div class="nav-link" tabindex="0" onclick="showSection('timeline')" onkeypress="if(event.key==='Enter'){showSection('timeline')}">Professional Experience</div> -->
+        <div class="nav-link" tabindex="0" onclick="showSection('education')" onkeypress="if(event.key==='Enter'){showSection('education')}">Education</div>
+        <div class="nav-link" tabindex="0" onclick="showSection('contact')" onkeypress="if(event.key==='Enter'){showSection('contact')}">Contact</div>
+      </nav>
+
+      <main class="content" role="main">
+        <section id="summary" class="section active" tabindex="0" aria-label="Summary section">
+            <h5 style="text-align: right; color: gray;">
+              <span style="color: #022242;">Currently Working as Software Engineer in CGI </span>
+              <!-- | Ex Cloud9 (MCodevity) | Ex Proinfocus -->
+            </h5>
+            <h2>Professional Summary</h2>
+           <br>
+            <p style="text-align: justify;">
+              Detail-oriented and proactive .NET Support Engineer with over 4.5 years of experience in providing L2/L3 technical support, troubleshooting .NET applications, and ensuring high system availability. Skilled in analysing application logs, debugging C# code, supporting IIS-hosted web apps, and resolving production issues efficiently. Adept at working closely with developers, QA, and infrastructure teams to maintain smooth application operations and ensure quick resolution of incidents.
+            </p>
+            <br>
+            <ul style="margin-left: 20px;">
+              <li>Extensive experience in MVC, Application Development, code debugging using ASP.Net development using C#.</li>
+              <li>Good exposure to SQL queries, and SQL Server Management tool.</li>
+              <li>Excellent communication, analytical, and problem-solving skills.</li>
+              <li>Strong knowledge in SDLC - worked mainly with Agile Software Development Methodology.</li>
+              <li>Worked on JIRA management tool, and ITSM services.</li>
+              <li>Operational processing monitoring and support.</li>
+              <li>Assistance with problem support and resolution.</li>
+              <li>Extensive experience in MVC, Application Development, code debugging using ASP.Net development using C#.</li>
+              <li>GitHub project version and repository management.</li>
+              <li>Experience in preparing Methods of Procedures (MOP).</li>
+            </ul>
+        </section>
+        <section id="employment" class="section" tabindex="0" aria-label="Employment section">
+           <h2>Employment</h2>
+           <br>
+           <table style="border-collapse: collapse; width: 100%; border: 1px solid #000;">
+              <thead>
+                <tr style="background: #33333350;">
+                  <th style="padding: 8px; border: 1px solid #000;">Company and Role</th>
+                  <th style="padding: 8px; border: 1px solid #000;">Month Year</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="color: #022242; font-weight: bold;">
+                  <td style="padding: 8px; border: 1px solid #000;">CGI Inc, Senior Software Engineer</td>
+                  <td style="padding: 8px; border: 1px solid #000;">October 2021 – Present</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid #000;">Cloud9 e-biz Pvt Ltd (Mcodevity), Software Engineer</td>
+                  <td style="padding: 8px; border: 1px solid #000;">Nov 2019 - Sep 2021</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid #000;">Proinfocus, Internship (Trainee)</td>
+                  <td style="padding: 8px; border: 1px solid #000;">Jun 2018 - Oct 2019</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+             <h2>Professional Experience</h2>
+             <br>
+             <p><strong>.NET Support Engineer</strong></p>
+              <p style="margin: 10px;">Key Responsibilities:</p>
+              <ul style="margin-left: 60px;">
+                <li>Provide L2/L3 support for .NET-based applications hosted on IIS.</li>
+                <li>Monitor system performance, logs, and alerts.</li>
+                <li>Analyse and troubleshoot application errors, unhandled exceptions, and performance issues.</li>
+                <li>Work closely with development teams to fix defects, apply patches, and perform RCA.</li>
+                <li>Handle deployment activities during release cycles.</li>
+                <li>Maintain documentation for support procedures, known issues, and solutions.</li>
+                <li>Improve incident response time through automation and proactive health checks.</li>
+              </ul>
+              <br>
+              <p><strong>Achievements</strong></p>
+              <ul style="margin-left: 60px;">
+                <li>Reduced ticket backlog by 30% through proactive monitoring scripts.</li>
+                <li>Implemented log analyser scripts in PowerShell, reducing RCA time by 40%.</li>
+                <li>Received “Best Support Engineer” award for Q3 2024.</li>
+              </ul>
+              <br>
+              <p><strong>Projects / Applications Supported</strong></p>
+
+              <p style="margin-left: 60px;"><strong>Tech Stack:</strong> ASP.NET, SQL Server, IIS</p>
+              <p style="margin-left: 60px;"><strong>Responsibility:</strong> Application uptime, issue resolution, deployment coordination.</p>
+              <br>
+
+              <p><strong>PEATS (Project Evaluation Approval and Tracking System)</strong> - Role: Software Engineer</p>
+              <p><strong>Responsibilities:</strong> Coordinated with Level 1 technical support specialists to take over calls outside their level of support.</p>
+              <ul style="margin-left: 60px;">
+                <li>Assisted customers with more difficult technical issues requiring a greater level of personalized care and in greater length.</li>
+                <li>Escalated support desk tickets to Level 3 in the most crucial circumstances and after considerable time had been spent on a single ticket.</li>
+                <li>Onboarded and trained all incoming junior tech support specialists.</li>
+                <li>Solved 99.2% of Level 2 tech support tickets without needing to escalate to Level 3 tech support engineers.</li>
+                <li><strong>Technology | Skills | Tools used:</strong> ASP.NET, SQL Server, Git hub, Google Cloud Platform</li>
+              </ul>
+                <br>
+              <p><strong>SSAAM (Sales Structure and Account Management)</strong> Role: Software Engineer</p>
+              <p><strong>Responsibilities:</strong> Assisted clients with general support for hardware, peripherals, network connections, and external software.</p>
+              <ul style="margin-left: 60px;">
+                <li>Supported customers with basic technical support for current and past software releases.</li>
+                <li>Escalated help desk tickets to Level 2 / Tier 2 support when outside the scope of L1/T1 technician support.</li>
+                <li>Developer and Automation for deleting and moving files/folders based on scheduled in event viewer.</li>
+                <li><strong>Technology | Skills | Tools used:</strong> ASP.NET, MS SQL Server, Git hub, Batch Code Files, Windows Job Scheduler</li>
+              </ul>
+              <br>
+              <p><strong>TRS (Tax Reasonability System)</strong> Role: Software Engineer</p>
+              <p><strong>Responsibilities:</strong> Supported customers with basic technical support for current and past software releases.</p>
+              <ul style="margin-left: 60px;">
+                <li>Assisted clients with general support for hardware, peripherals, network connections, and external software.</li>
+                <li>Escalated help desk tickets to Level 2 / Tier 2 support when outside the scope of L1/T1 technician support.</li>
+                <li><strong>Technology | Skills | Tools used:</strong> ASP.NET, MS SQL Server, Git hub, Google Cloud Platform.</li>
+              </ul>
+
+        </section>
+        <section id="skills" class="section" tabindex="0" aria-label="Skills section">
+           <h2>Skills</h2>
+          <br>
+          <table style="width: 100%; border-collapse: collapse;" border="1">
+            <tbody>
+              <tr>
+                <td style="padding: 8px; font-weight: bold; width: 250px;">Languages</td>
+                <td style="padding: 8px;">C#, ASP.NET, .NET Framework, .NET Core.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Web Technologies</td>
+                <td style="padding: 8px;">HTML, CSS, JavaScript.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Database</td>
+                <td style="padding: 8px;">SQL Server.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Tools &amp; Environments</td>
+                <td style="padding: 8px;">Visual Studio, Visual Basics, Git, IIS.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Support Skills</td>
+                <td style="padding: 8px;">Incident Management, Root Cause Analysis (RCA), Application Monitoring, Performance Tuning.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Ticketing Tools</td>
+                <td style="padding: 8px;">ServiceNow, Jira.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Version Control</td>
+                <td style="padding: 8px;">Git, SVN.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Operating Systems</td>
+                <td style="padding: 8px;">Windows Server.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Framework</td>
+                <td style="padding: 8px;">ASP.Net Web Forms, ASP.Net MVC, Bootstrap, Entity Framework, Google Cloud Platform</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: bold;">Tools</td>
+                <td style="padding: 8px;">Adobe Design XD, Adobe Photoshop, Adobe Illustrator, Adobe Premier Pro.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="tools" class="section" tabindex="0" aria-label="Tools section">
+          <h2>Experience in tools</h2>
+          <br>
+          <table style="width: 100%; border-collapse: collapse;" border="1">
+          <thead>
+            <tr>
+              <th colspan="3" style="padding: 8px; text-align: left;">Language | Framework | Tool</th>
+              <th style="padding: 8px; text-align: left;">Experience</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr>
+              <td colspan="3" style="padding: 8px;">Supporting Application and Monitoring</td>
+              <td style="padding: 8px; text-align: left;">4.5 years</td>
+            </tr>
+            <tr>
+              <td colspan="3" style="padding: 8px;">HTML, JavaScript, CSS</td>
+              <td style="padding: 8px; text-align: left;">3.5 years</td>
+            </tr>
+
+            <tr>
+              <td colspan="3" style="padding: 8px;">ASP.Net Framework and C#</td>
+              <td style="padding: 8px; text-align: left;">2 years</td>
+            </tr>
+
+            <tr>
+              <td colspan="3" style="padding: 8px;">MVC, Razor Pages</td>
+              <td style="padding: 8px; text-align: left;">2 years</td>
+            </tr>
+
+            <tr>
+              <td colspan="3" style="padding: 8px;">MS SQL Server</td>
+              <td style="padding: 8px; text-align: left;">3 years</td>
+            </tr>
+
+            <tr>
+              <td colspan="3" style="padding: 8px;">Photoshop, Illustrator, and Adobe XD</td>
+              <td style="padding: 8px; text-align: left;">3 years</td>
+            </tr>
+
+            <tr>
+              <td colspan="3" style="padding: 8px;">GitHub repository application version control</td>
+              <td style="padding: 8px; text-align: left;">2 years</td>
+            </tr>
+          
+          </tbody>
+        </table>
+        </section>
+        <section id="timeline" class="section" tabindex="0" aria-label="Timeline section"><h2>Timeline</h2>
+          <ul>
+            <li>2021 - Present: Senior Software Engineer</li>
+            <li>2018 - 2021: Software Engineer</li>
+            <li>2014 - 2018: B.Tech CSE</li>
+          </ul>
+        </section>
+        <section id="education" class="section" tabindex="0" aria-label="Education section">
+          <h2>Education</h2>
+           <br>
+           <table style="border-collapse: collapse; width: 100%; border: 1px solid #000;">
+              <thead style="text-align: left;">
+                <tr style="background: #33333350;">
+                  <th style="padding: 8px; border: 1px solid #000;">Collage | School | Unioversity Names</th>
+                  <th style="padding: 8px; border: 1px solid #000;">Complection Year</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr">
+                  <td style="padding: 8px; border: 1px solid #000;"><strong>Master of Computer Application (MCA)</strong>
+                    <br>Specialization in Computer Applications Bangalore University, Karnataka, India</td>
+                  <td style="padding: 8px; border: 1px solid #000;">2016 - 2018</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid #000;"><strong>Bachelor of Computer Application (BCA)</strong>
+                    <br>Specialization in Computer Applications Gulbarga University, Karnataka, India </td>
+                  <td style="padding: 8px; border: 1px solid #000;">2013 - 2016</td>
+                </tr>
+              </tbody>
+            </table>
+        </section>
+        <section id="contact" class="section" tabindex="0" aria-label="Contact section">
+          <h2>Contact</h2>
+          <br>
+          <table style="border-collapse: collapse; width: 100%; border: 1px solid #000;">
+              <!-- <thead style="text-align: left;">
+                <tr style="background: #33333350;">
+                  <th style="padding: 8px; border: 1px solid #000;">Collage | School | Unioversity Names</th>
+                  <th style="padding: 8px; border: 1px solid #000;">Complection Year</th>
+                </tr>
+              </thead> -->
+              <tbody>
+                <tr">
+                  <td style="padding: 8px; border: 1px solid #000;"><strong>Email: </strong></td>
+                  <td style="padding: 8px; border: 1px solid #000;">dheeraj.barad@gmail.com</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid #000;"><strong>Phone</strong></td>
+                  <td style="padding: 8px; border: 1px solid #000;">+91 99160 09863</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid #000;"><strong>LinkedIn</strong></td>
+                  <td style="padding: 8px; border: 1px solid #000;">linkedin.com/in/dheeraj.barad</td>
+                </tr>
+                 <tr>
+                  <td style="padding: 8px; border: 1px solid #000;"><strong>LinkedIn</strong></td>
+                  <td style="padding: 8px; border: 1px solid #000;">linkedin.com/in/dheeraj.barad</td>
+                </tr>
+                 <tr>
+                  <td style="padding: 8px; border: 1px solid #000;"><strong>Address</strong></td>
+                  <td style="padding: 8px; border: 1px solid #000;">Kalaburagi, India</td>
+                </tr>
+              </tbody>
+            </table>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="container" style="min-height: 40px; height: 40px;">
+    <header class="header">
+      <div class="profile">
+        
+        <div class="profile-info">
+          
+        </div>
+      </div>
+      <div style="font-size: small; text-align: right; height: 15vh; padding: 6px; margin-right:10px ;">
+          <h6>Last updated on:</h6><p>05-08-2025</p>
+        </div>
+      <div class="burger" id="burger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+  </div>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const sidebar = document.getElementById('sidebar');
+    const navLinks = sidebar.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.section');
+
+    burger.addEventListener('click', () => {
+      sidebar.classList.toggle('show');
+      document.body.classList.toggle('sidebar-open');
+    });
+
+    function showSection(id) {
+      // Show the selected section content
+      sections.forEach(section => {
+        section.classList.toggle('active', section.id === id);
+      });
+
+      // Highlight nav link
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.textContent.trim().toLowerCase() === id);
+      });
+
+      // Close sidebar on mobile after selection
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove('show');
+        document.body.classList.remove('sidebar-open');
+      }
+    }
+
+    // Optional: close sidebar on window resize if desktop
+    window.addEventListener('resize', () => {
+      if(window.innerWidth > 768) {
+        sidebar.classList.remove('show');
+        document.body.classList.remove('sidebar-open');
+      }
+    });
+  </script>
+</body>
+</html>
