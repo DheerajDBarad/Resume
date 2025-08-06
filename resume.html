@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <title>Responsive Profile Layout</title>
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
+      
       padding: 0;
     }
 
@@ -45,7 +46,7 @@
     .profile {
       display: flex;
       align-items: center;
-      gap: 50px;
+      gap: 25px;
       
     }
 
@@ -54,17 +55,18 @@
       height: 200px;
       margin-left: -50px;
       border-radius: 50%;
-      border: 2px solid #ecf0f1;
+      border: 3px solid #ecf0f175;
       object-fit: cover;
     }
 
     .profile-info h2 {
-      font-size: 20px;
+      font-size: 34px;
       font-weight: 600;
+      margin-bottom: 0;
     }
 
     .profile-info p {
-      font-size: 14px;
+      font-size: 12px;
       margin-top: 4px;
       color: #bdc3c7;
     }
@@ -76,6 +78,7 @@
       gap: 5px;
       cursor: pointer;
       user-select: none;
+      padding-right: 20px;
     }
 
     .burger span {
@@ -92,6 +95,8 @@
       flex: 1;
       height: calc(100vh - 90px); /* approximate header height */
       overflow: hidden;
+      
+      
     }
 
     .sidebar {
@@ -170,7 +175,7 @@
         box-shadow: 2px 0 12px rgba(0,0,0,0.3);
         border-bottom-right-radius: 12px;
         border-bottom-left-radius: 12px;
-        background: #34495e;
+        background: #022242;
         transition: transform 0.3s ease;
       }
 
@@ -192,7 +197,7 @@
       <div class="profile">
         <img src="DheerajProfile.jpeg" alt="Profile Picture" />
         <div class="profile-info">
-          <h1>Dheeraj Barad </h1>
+          <h2>Dheeraj Barad </h2>
           <p>Software Engineer</p>
         </div>
       </div>
@@ -204,7 +209,7 @@
     </header>
   </div>
 
-  <div class="container">
+  <div class="container" style="border: 1px solid #9999992f;">
     
 
     <div class="main">
@@ -220,27 +225,29 @@
 
       <main class="content" role="main">
         <section id="summary" class="section active" tabindex="0" aria-label="Summary section">
-            <h5 style="text-align: right; color: gray;">
+            
+            <h2>Professional Summary</h2>
+            
+            <h5 style="text-align:right; color: gray;">
               <span style="color: #022242;">Currently Working as Software Engineer in CGI </span>
               <!-- | Ex Cloud9 (MCodevity) | Ex Proinfocus -->
-            </h5>
-            <h2>Professional Summary</h2>
-           <br>
-            <p style="text-align: justify;">
+            </h5>   
+           
+            <p style="text-align:justify;">
               Detail-oriented and proactive .NET Support Engineer with over 4.5 years of experience in providing L2/L3 technical support, troubleshooting .NET applications, and ensuring high system availability. Skilled in analysing application logs, debugging C# code, supporting IIS-hosted web apps, and resolving production issues efficiently. Adept at working closely with developers, QA, and infrastructure teams to maintain smooth application operations and ensure quick resolution of incidents.
             </p>
             <br>
-            <ul style="margin-left: 20px;">
-              <li>Extensive experience in MVC, Application Development, code debugging using ASP.Net development using C#.</li>
-              <li>Good exposure to SQL queries, and SQL Server Management tool.</li>
-              <li>Excellent communication, analytical, and problem-solving skills.</li>
-              <li>Strong knowledge in SDLC - worked mainly with Agile Software Development Methodology.</li>
-              <li>Worked on JIRA management tool, and ITSM services.</li>
-              <li>Operational processing monitoring and support.</li>
-              <li>Assistance with problem support and resolution.</li>
-              <li>Extensive experience in MVC, Application Development, code debugging using ASP.Net development using C#.</li>
-              <li>GitHub project version and repository management.</li>
-              <li>Experience in preparing Methods of Procedures (MOP).</li>
+            <ul style="margin-left: 5px; list-style: none;">
+              <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Extensive experience in MVC, Application Development, code debugging using ASP.Net development using C#.</li>
+              <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Good exposure to SQL queries, and SQL Server Management tool.</li>
+              <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Excellent communication, analytical, and problem-solving skills.</li>
+              <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Strong knowledge in SDLC - worked mainly with Agile Software Development Methodology.</li>
+              <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Worked on JIRA management tool, and ITSM services.</li>
+              <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Operational processing monitoring and support.</li>
+              <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Assistance with problem support and resolution.</li>
+              <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Extensive experience in MVC, Application Development, code debugging using ASP.Net development using C#.</li>
+              <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> GitHub project version and repository management.</li>
+              <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Experience in preparing Methods of Procedures (MOP).</li>
             </ul>
         </section>
         <section id="employment" class="section" tabindex="0" aria-label="Employment section">
@@ -273,21 +280,21 @@
              <br>
              <p><strong>.NET Support Engineer</strong></p>
               <p style="margin: 10px;">Key Responsibilities:</p>
-              <ul style="margin-left: 60px;">
-                <li>Provide L2/L3 support for .NET-based applications hosted on IIS.</li>
-                <li>Monitor system performance, logs, and alerts.</li>
-                <li>Analyse and troubleshoot application errors, unhandled exceptions, and performance issues.</li>
-                <li>Work closely with development teams to fix defects, apply patches, and perform RCA.</li>
-                <li>Handle deployment activities during release cycles.</li>
-                <li>Maintain documentation for support procedures, known issues, and solutions.</li>
-                <li>Improve incident response time through automation and proactive health checks.</li>
+              <ul style="margin-left: 10px; list-style: none; text-align:justify;">
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Provide L2/L3 support for .NET-based applications hosted on IIS.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Monitor system performance, logs, and alerts.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Analyse and troubleshoot application errors, unhandled exceptions, and performance issues.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Work closely with development teams to fix defects, apply patches, and perform RCA.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Handle deployment activities during release cycles.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Maintain documentation for support procedures, known issues, and solutions.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Improve incident response time through automation and proactive health checks.</li>
               </ul>
               <br>
               <p><strong>Achievements</strong></p>
-              <ul style="margin-left: 60px;">
-                <li>Reduced ticket backlog by 30% through proactive monitoring scripts.</li>
-                <li>Implemented log analyser scripts in PowerShell, reducing RCA time by 40%.</li>
-                <li>Received “Best Support Engineer” award for Q3 2024.</li>
+              <ul style="margin-left: 10px; list-style: none; text-align:justify;">
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Reduced ticket backlog by 30% through proactive monitoring scripts.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Implemented log analyser scripts in PowerShell, reducing RCA time by 40%.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Received “Best Support Engineer” award for Q3 2024.</li>
               </ul>
               <br>
               <p><strong>Projects / Applications Supported</strong></p>
@@ -298,28 +305,28 @@
 
               <p><strong>PEATS (Project Evaluation Approval and Tracking System)</strong> - Role: Software Engineer</p>
               <p><strong>Responsibilities:</strong> Coordinated with Level 1 technical support specialists to take over calls outside their level of support.</p>
-              <ul style="margin-left: 60px;">
-                <li>Assisted customers with more difficult technical issues requiring a greater level of personalized care and in greater length.</li>
-                <li>Escalated support desk tickets to Level 3 in the most crucial circumstances and after considerable time had been spent on a single ticket.</li>
-                <li>Onboarded and trained all incoming junior tech support specialists.</li>
-                <li>Solved 99.2% of Level 2 tech support tickets without needing to escalate to Level 3 tech support engineers.</li>
+              <ul style="margin-left: 10px; list-style: none; text-align:justify;">
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Assisted customers with more difficult technical issues requiring a greater level of personalized care and in greater length.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Escalated support desk tickets to Level 3 in the most crucial circumstances and after considerable time had been spent on a single ticket.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Onboarded and trained all incoming junior tech support specialists.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Solved 99.2% of Level 2 tech support tickets without needing to escalate to Level 3 tech support engineers.</li>
                 <li><strong>Technology | Skills | Tools used:</strong> ASP.NET, SQL Server, Git hub, Google Cloud Platform</li>
               </ul>
                 <br>
               <p><strong>SSAAM (Sales Structure and Account Management)</strong> Role: Software Engineer</p>
               <p><strong>Responsibilities:</strong> Assisted clients with general support for hardware, peripherals, network connections, and external software.</p>
-              <ul style="margin-left: 60px;">
-                <li>Supported customers with basic technical support for current and past software releases.</li>
-                <li>Escalated help desk tickets to Level 2 / Tier 2 support when outside the scope of L1/T1 technician support.</li>
-                <li>Developer and Automation for deleting and moving files/folders based on scheduled in event viewer.</li>
+              <ul style="margin-left: 10px; list-style: none; text-align:justify;">
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Supported customers with basic technical support for current and past software releases.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Escalated help desk tickets to Level 2 / Tier 2 support when outside the scope of L1/T1 technician support.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Developer and Automation for deleting and moving files/folders based on scheduled in event viewer.</li>
                 <li><strong>Technology | Skills | Tools used:</strong> ASP.NET, MS SQL Server, Git hub, Batch Code Files, Windows Job Scheduler</li>
               </ul>
               <br>
               <p><strong>TRS (Tax Reasonability System)</strong> Role: Software Engineer</p>
               <p><strong>Responsibilities:</strong> Supported customers with basic technical support for current and past software releases.</p>
-              <ul style="margin-left: 60px;">
-                <li>Assisted clients with general support for hardware, peripherals, network connections, and external software.</li>
-                <li>Escalated help desk tickets to Level 2 / Tier 2 support when outside the scope of L1/T1 technician support.</li>
+              <ul style="margin-left: 10px; list-style: none; text-align:justify;">
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Assisted clients with general support for hardware, peripherals, network connections, and external software.</li>
+                <li><span style=" padding-right: 10px;"><i class="fa fa-arrow-right"></i></span> Escalated help desk tickets to Level 2 / Tier 2 support when outside the scope of L1/T1 technician support.</li>
                 <li><strong>Technology | Skills | Tools used:</strong> ASP.NET, MS SQL Server, Git hub, Google Cloud Platform.</li>
               </ul>
 
@@ -488,24 +495,13 @@
       </main>
     </div>
   </div>
-  <div class="container" style="min-height: 40px; height: 40px;">
-    <header class="header">
-      <div class="profile">
-        
-        <div class="profile-info">
-          
-        </div>
-      </div>
-      <div style="font-size: small; text-align: right; height: 15vh; padding: 6px; margin-right:10px ;">
-          <h6>Last updated on:</h6><p>05-08-2025</p>
-        </div>
-      <div class="burger" id="burger" aria-label="Toggle navigation menu" role="button" tabindex="0">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </header>
+   <div class="container" style="min-height: 0vh;">
+  <div style="align-items: center; padding: 10px; height: 5vh; display: flex; background: #ecf0f1; border: 1px solid #9999992f; border-radius: 8px; justify-content: space-between;">
+      <h6>Last updated on: 05-08-2025</h6>
   </div>
+  </div>
+    
+  
 
   <script>
     const burger = document.getElementById('burger');
@@ -546,6 +542,3 @@
   </script>
 </body>
 </html>
-
-
-
